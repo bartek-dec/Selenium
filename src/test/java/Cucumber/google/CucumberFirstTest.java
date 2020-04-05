@@ -1,4 +1,4 @@
-package Cucumber;
+package Cucumber.google;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;

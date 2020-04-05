@@ -1,6 +1,7 @@
 package priceFiltr;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -51,6 +52,12 @@ public class ZadanieDodatkowe_3_Test {
         //click selected price range
         checkbox.click();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //select found products
         List<WebElement> foundProducts = driver.findElements(By.className("thumbnail-container"));
 
@@ -63,13 +70,11 @@ public class ZadanieDodatkowe_3_Test {
             Double productPrice = convertNumber(price.getText());
 
             if (productPrice < lowerBound) {
-                System.out.println("###########");
-                //Assert.fail();
+                Assert.fail();
             }
 
             if (productPrice > upperBound) {
-                System.out.println("###########");
-                //Assert.fail();
+                Assert.fail();
             }
         }
     }

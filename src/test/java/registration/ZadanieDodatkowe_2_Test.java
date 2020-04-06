@@ -38,7 +38,7 @@ public class ZadanieDodatkowe_2_Test {
         driver.get("https://prod-kurs.coderslab.pl/index.php?controller=authentication&create_account=1");
 
         //initiate user data
-        firstName = "Andrzej";
+        firstName = "Janek";
         lastName = "Kowalski";
         password = "password123";
 
@@ -48,7 +48,7 @@ public class ZadanieDodatkowe_2_Test {
     private String generateEmail() {
         //generate random number
         random = new Random();
-        randomNumber = random.nextInt(100);
+        randomNumber = random.nextInt(5);
 
         //create email string -> userName123@mail.com
         builder = new StringBuilder();

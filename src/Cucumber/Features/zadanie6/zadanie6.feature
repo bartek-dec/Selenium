@@ -13,6 +13,6 @@ Feature: New account
 
     Examples:
       | emailAddress | firstName | lastName | password | day | month | year |
-      | janek1@op.pl | Janek     | Kowalski | qwerty   | 12  | 4     | 2000 |
-      | janek2@op.pl | Janek     | Kowalski | qwerty   | 15  | 6     | 2001 |
-      | janek3@op.pl | Janek     | Kowalski | qwerty   | 17  | 9     | 1998 |
+      | janek4@op.pl | Janek     | Kowalski | qwerty   | 12  | 4     | 2000 |
+      | janek5@op.pl | Janek     | Kowalski | qwerty   | 15  | 6     | 2001 |
+      | janek6@op.pl | Janek     | Kowalski | qwerty   | 17  | 9     | 1998 |

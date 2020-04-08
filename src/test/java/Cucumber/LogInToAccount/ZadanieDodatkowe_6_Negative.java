@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ZadanieDodatkowe_6_Negative {
 
@@ -22,6 +23,7 @@ public class ZadanieDodatkowe_6_Negative {
                 "src/main/resources/drivers/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://prod-kurs.coderslab.pl/index.php?controller=authentication&back=my-account");
     }
 
@@ -40,7 +42,6 @@ public class ZadanieDodatkowe_6_Negative {
     public void pressSignIn() {
         WebElement signIn = driver.findElement(By.id("submit-login"));
         signIn.click();
-        sleepThread();
     }
 
     @Then("error showed")
@@ -51,13 +52,5 @@ public class ZadanieDodatkowe_6_Negative {
     @And("browser closed")
     public void signOutAndClose() {
         driver.close();
-    }
-
-    private void sleepThread() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

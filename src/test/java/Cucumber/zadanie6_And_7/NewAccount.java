@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.concurrent.TimeUnit;
+
 public class NewAccount {
 
     private WebDriver driver;
@@ -21,6 +23,7 @@ public class NewAccount {
                 "src/main/resources/drivers/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://qloapps.coderslab.pl/");
     }
 
@@ -40,7 +43,6 @@ public class NewAccount {
     public void pressCreateAccount() {
         WebElement button = driver.findElement(By.id("SubmitCreate"));
         button.click();
-        sleepThread();
     }
 
     @And("personal information (.*), (.*), (.*), (.*), (.*), (.*) are provided")
@@ -65,8 +67,6 @@ public class NewAccount {
         days.selectByValue(day);
         months.selectByValue(month);
         years.selectByValue(year);
-
-        sleepThread();
     }
 
     @And("register button is pressed")
@@ -84,13 +84,5 @@ public class NewAccount {
     @And("close the browser")
     public void closeBrowser() {
         driver.close();
-    }
-
-    private void sleepThread() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

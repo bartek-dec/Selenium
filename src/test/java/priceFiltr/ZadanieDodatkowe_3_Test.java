@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,18 +54,17 @@ public class ZadanieDodatkowe_3_Test {
         //click selected price range
         checkbox.click();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //wait until website refresh itself
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.urlContains("Price")));
 
-        //select found products
+        //select filtered products
         List<WebElement> foundProducts = driver.findElements(By.className("thumbnail-container"));
 
-
+        //get price range (lower and upper)
         Double lowerBound = range.get(0);
         Double upperBound = range.get(1);
+
         //check each element found whether it is within price range or not
         for (WebElement product : foundProducts) {
             WebElement price = product.findElement(By.className("price"));

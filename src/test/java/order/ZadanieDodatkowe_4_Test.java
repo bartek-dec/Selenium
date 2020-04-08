@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ZadanieDodatkowe_4_Test {
 
@@ -22,6 +23,7 @@ public class ZadanieDodatkowe_4_Test {
                 "src/main/resources/drivers/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://prod-kurs.coderslab.pl/index.php");
     }
 
@@ -31,11 +33,10 @@ public class ZadanieDodatkowe_4_Test {
         int index = 0;
 
         //add two products to the basket
-        while (counter < 2) {
+        while (counter < 3) {
             //go from main page to "all products" page
             WebElement allProductsButton = driver.findElement(By.cssSelector("a.all-product-link.float-xs-left.float-md-right.h4"));
             allProductsButton.click();
-            sleepThread();
 
             //select all products
             List<WebElement> products = driver.findElements(By.cssSelector("a.thumbnail.product-thumbnail"));
@@ -43,7 +44,6 @@ public class ZadanieDodatkowe_4_Test {
             //select product form list
             WebElement product = products.get(index);
             product.click();
-            sleepThread();
 
             //check if product is available
             String availability = driver.findElement(By.id("product-availability")).getText();
@@ -53,28 +53,23 @@ public class ZadanieDodatkowe_4_Test {
                 index++;
                 WebElement goToHomePage = driver.findElement(By.cssSelector("img.logo.img-responsive"));
                 goToHomePage.click();
-                sleepThread();
             } else {
                 //if product available -> add to basket and repeat previous steps
                 counter++;
                 index++;
                 WebElement addToChart = driver.findElement(By.cssSelector("button.btn.btn-primary.add-to-cart"));
                 addToChart.click();
-                sleepThread();
 
-                if (counter < 2) {
+                if (counter < 3) {
                     WebElement continueShopping = driver.findElement(By.cssSelector("button.btn.btn-secondary"));
                     continueShopping.click();
-                    sleepThread();
 
                     WebElement goToHomePage = driver.findElement(By.cssSelector("img.logo.img-responsive"));
                     goToHomePage.click();
-                    sleepThread();
                 } else {
                     //when to products in the basket -> got to the basket
                     WebElement checkout = driver.findElement(By.cssSelector("a.btn.btn-primary"));
                     checkout.click();
-                    sleepThread();
                 }
             }
         }
@@ -85,14 +80,6 @@ public class ZadanieDodatkowe_4_Test {
         int numberOfProducts = Integer.parseInt(strings[0]);
 
         Assert.assertEquals(numberOfProducts, counter);
-    }
-
-    private void sleepThread() {
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @After
